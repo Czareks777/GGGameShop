@@ -1,0 +1,44 @@
+﻿@using Models.Models
+@model IEnumerable<Game>
+
+<div class="row pb-3">
+
+    @foreach (var game in Model)
+    {
+        @if (game.GameCategoryId == 1)
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow  border-5 rounded">
+                            <img src="@game.ImageUrl" class="rounded" />
+
+                            <div class="card-body pb-0">
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-light opacity-75 text-uppercase text-center">@game.Title</p>
+                                    <p class="card-title text-warning text-center">by <b>@game.DevStudio</b></p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="text-light text-opacity-75 text-center mb-0">
+                                        Steam Price:
+                                        <span class="text-light">
+                                            @game.PriceSteam.ToString("c")
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="pl-1">
+                                </div>
+                            </div>
+                            <div>
+                                <a asp-action="Buy"
+                                   asp-route-gameId="@game.Id"
+                                   class="btn btn-primary bg-gradient border-0 form-control">
+                                    Buy
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }       }
+</div>

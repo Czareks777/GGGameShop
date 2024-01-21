@@ -1,0 +1,97 @@
+﻿@using Models.Models
+@model Game
+<form method="post">
+    <div class="card border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient text-light py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h3 class="text-white text-uppercase">@Model.Title</h3>
+                    <p class="text-white-50 fw-semibold mb-0">@Model.DevStudio</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="py-3">
+                <div class="row">
+                    <div class="col-6 col-md-2 offset-lg-1 pb-1">
+                        @if (Model.GameCategoryId == 1)
+                        {
+                            <a asp-action="FPS" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <small>Return</small>
+                            </a>
+                        }
+                        @if (Model.GameCategoryId == 2)
+                        {
+                            <a asp-action="Strategy" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <small>Return</small>
+                            </a>
+                        }
+                        @if (Model.GameCategoryId == 3)
+                        {
+                            <a asp-action="RPG" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm text-uppercase">
+                                <small>Return</small>
+                            </a>
+                        }
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+                        <img src="@Model.ImageUrl" width="100%" class="rounded" />
+                    </div>
+                    <div class="col-12 col-lg-6 offset-lg-1 bg-gradient rounded">
+
+                        <div class="row ps-2 ">
+                            <h6 class="text-light text-opacity-50  pb-2">
+                                Price on different platforms:
+
+                            </h6>
+                        </div>
+                        <div class="row text-center ps-2 ">
+                            <div class="p-1 col-3 col-lg-2  border-bottom">
+                                <div class="text-light text-opacity-50 fw-semibold">@Model.PriceSteam$</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2  border-bottom">
+                                <div class="text-light text-opacity-50 fw-semibold">@Model.PriceXbox$</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2  border-bottom">
+                                <div class="text-light text-opacity-50 fw-semibold">@Model.PricePS$</div>
+                            </div>
+
+                        </div>
+                        <div class="row text-center ps-2 ">
+                            <div class="p-1 col-3 col-lg-2  text-warning fw-bold">
+                                <div>Steam</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2  text-warning fw-bold">
+                                <div>Xbox</div>
+                            </div>
+                            <div class="p-1 col-3 col-lg-2  text-warning fw-bold">
+                                <div>PlayStation</div>
+                            </div>
+
+                        </div>
+                        <div class="row pl-2 my-3">
+                            <p class="text-white fw-bold lh-sm">@Model.Description</p>
+                        </div>
+                        <div class="row pl-2 mb-3">
+                            <div class="col-md-4">
+                                <div class="input-group mb-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6 pb-1">
+                                <button type="submit" disabled
+                                        class="btn btn-primary bg-gradient  w-100 py-2 text-uppercase fw-semibold">
+                                    Add to Cart (Comming Soon...)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

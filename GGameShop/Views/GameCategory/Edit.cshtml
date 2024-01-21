@@ -1,0 +1,33 @@
+﻿@using Models.Models
+@model GameCategory
+
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h1 class="text-bg-primary">Edit Category</h1>
+            <hr />
+        </div>
+        <div asp-asp-validation-summary="All"></div>
+
+
+
+        <div class="mb-3 row">
+            <label class="p-0">Game Category</label>
+            <input asp-for="Category" class="form-control" />
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-outline-primary bg-warning bg-gradient " style="width:125px">Edit</button>
+        <a asp-controller="GameCategory" asp-action="Index" class="btn btn-secondary  " style="width:125px">
+            Back
+        </a>
+    </div>
+</form>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
