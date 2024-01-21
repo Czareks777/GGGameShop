@@ -1,5 +1,96 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using Models.Models
+@model List<Game>;
+
+
+<div class="container">
+    <div class="row pt-4 pb-2">
+        <div class="col-6">
+            <h3 class="text-primary ">
+            </h3>
+        </div>
+        <div class="col-6 text-end">
+
+            <a asp-controller="Game" asp-action="Create" class="btn btn-primary">
+                <i class=" bi bi-database-fill-add text-success"> </i> New Game
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <h1>List of all games</h1>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Developer Studio
+                </th>
+                <th>
+                    Game Category
+                </th>
+                <th>
+                    Price Steam
+                </th>
+                <th>
+                    Price PlayStation
+                </th>
+                <th>
+                    Price Xbox
+                </th>
+                <th>
+                    Image Url
+                </th>
+                <th>
+                    Trailer Url
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Title</td>
+                    <td>@item.Description</td>
+                    <td>@item.DevStudio</td>
+                    <td>@item.GameCategoryId</td>
+                    <td>@item.PriceSteam</td>
+                    <td>@item.PricePS</td>
+                    <td>@item.PriceXbox</td>
+                    <td>@item.ImageUrl</td>
+                    <td>@item.TrailerUrl</td>
+                    <td>
+                        <div class="w-100 btn-group" role="group">
+                            <a asp-controller="Game" asp-action="Edit" asp-route-gameId="@item.Id" class="btn btn-primary mx-1">
+                                <i class="bi bi-database-fill-gear text-warning"></i> Edit
+                            </a>
+                            <a asp-controller="Game" asp-action="Delete" asp-route-gameId="@item.Id" class="btn btn-primary mx-1 ">
+                                <i class="bi bi-database-fill-dash text-danger"></i> Delete
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>

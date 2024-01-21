@@ -1,5 +1,74 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@using Models.Models
+@model Game
+
+
+
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h1 class="text-bg-primary">Delete Game</h1>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Id"></label>
+            <input asp-for="Id" class="form-control" />
+            <span asp-validation-for="Id" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Title"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="DevStudio"></label>
+            <input asp-for="DevStudio" class="form-control" />
+            <span asp-validation-for="DevStudio" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="GameCategoryId"></label>
+            <input asp-for="GameCategoryId" class="form-control" />
+            <span asp-validation-for="GameCategoryId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PriceSteam"></label>
+            <input asp-for="PriceSteam" class="form-control" />
+            <span asp-validation-for="PriceSteam" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PricePS"></label>
+            <input asp-for="PricePS" class="form-control" />
+            <span asp-validation-for="PricePS" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="PriceXbox"></label>
+            <input asp-for="PriceXbox" class="form-control" />
+            <span asp-validation-for="PriceXbox" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="TrailerUrl"></label>
+            <input asp-for="TrailerUrl" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-outline-primary bg-danger bg-gradient" style="width:125px">Delete</button>
+        <a asp-controller="Game" asp-action="Index" class="btn btn-secondary" style="width:125px">
+            Back
+        </a>
+    </div>
+</form>
+
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
 }
