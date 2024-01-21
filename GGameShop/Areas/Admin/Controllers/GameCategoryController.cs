@@ -1,9 +1,13 @@
 ﻿using DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
+using Utility;
 
-namespace GGameShop.Controllers
+namespace GGameShop.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles =StaticDetails.Role_Admin)]
     public class GameCategoryController : Controller
     {
         private readonly ApplicationDbContext _db;

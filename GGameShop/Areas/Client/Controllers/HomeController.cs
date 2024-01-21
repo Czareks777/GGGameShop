@@ -6,7 +6,7 @@ using Models.Models;
 using Models.ViewModels;
 using System.Diagnostics;
 
-namespace GGameShop.Controllers
+namespace GGameShop.Areas.Client.Controllers
 {
     public class HomeController : Controller
     {

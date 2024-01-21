@@ -1,15 +1,19 @@
 ﻿
 using DataAccess;
 using GameShop.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Models.Models;
 using Models.ViewModels;
+using Utility;
 
-namespace GGameShop.Controllers
+namespace GGameShop.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = StaticDetails.Role_Admin)]
     public class GameController : Controller
     {
         private readonly ApplicationDbContext _db;
