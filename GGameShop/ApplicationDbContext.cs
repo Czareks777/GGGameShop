@@ -1,7 +1,9 @@
 ﻿
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using System.Reflection.Emit;
 namespace DataAccess
 
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -20,6 +22,7 @@ namespace DataAccess
         }
         public DbSet<GameCategory> GameCategories { get; set; }
         public DbSet<Game> Games { get; set; }
+        public DbSet<User> Users {  get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
