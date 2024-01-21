@@ -1,13 +1,16 @@
 
 using GameShop.Repository.IRepository;
-using GGameShop.Models;
+using GGameShop.Migrations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.Models;
 using Models.ViewModels;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace GGameShop.Areas.Client.Controllers
 {
+    [Area("Client")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -25,8 +28,42 @@ namespace GGameShop.Areas.Client.Controllers
         }
         public IActionResult Buy(int gameId)
         {
-            Game gameBuy = _unitOfWork.GameRepository.Get(u => u.Id == gameId);
-            return View(gameBuy);
+            Models.Cart cart = new()
+            {
+                Game = _unitOfWork.GameRepository.Get(u => u.Id == gameId, includeProperties: "GameCategory"),
+                Quantity = 1,
+                GameId = gameId
+            };
+            return View(cart);
+        }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Buy(Models.Cart cart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            cart.UserId = userId;
+
+            Models.Cart cartFromDb = _unitOfWork.CartRepository.Get(u => u.UserId == userId &&
+            u.GameId == cart.GameId);
+
+            if (cartFromDb != null)
+            {
+                //shopping cart exists
+               
+                cartFromDb.Quantity += cart.Quantity;
+                _unitOfWork.CartRepository.Update(cartFromDb);
+                _unitOfWork.Save();
+            }
+            else
+            {
+                //add cart record
+                cart.Quantity = 1;
+                _unitOfWork.CartRepository.Add(cart);
+                _unitOfWork.Save();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
         public IActionResult FPS()
         {

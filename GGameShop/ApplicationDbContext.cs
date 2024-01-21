@@ -23,6 +23,9 @@ namespace DataAccess
         public DbSet<GameCategory> GameCategories { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<User> Users {  get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

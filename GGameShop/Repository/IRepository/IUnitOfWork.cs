@@ -6,6 +6,10 @@ namespace GameShop.Repository.IRepository
     {
         IGameCategoryRepository GameCategoryRepository { get; }
         IGameRepository GameRepository { get; }
+        ICartRepository CartRepository { get; }
+        IUserRepository UserRepository { get; }
+        IOrderDetailRepository OrderDetailRepository { get; }
+        IOrderHeaderRepository  OrderHeaderRepository { get; }
         void Save();
     }
 }
