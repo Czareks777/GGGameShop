@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Utility;
 using Stripe;
+using GGameShop.DbInitalizer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +22,7 @@ builder.Services.AddAuthentication().AddFacebook(option =>
     option.AppId = "276671078506660";
     option.AppSecret = "b1e8cd2a6e82ea622d124e3bae3eb4b5";
 });
-
+builder.Services.AddScoped<IDbInitalizer,DbInitalizer>();
 builder.Services.AddRazorPages();
 builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
@@ -53,8 +54,19 @@ StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey"
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapRazorPages();
+
+SeedDatabase();
 app.MapControllerRoute(
     name: "default",
     pattern: "{area=Client}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitalizer>();
+        dbInitializer.Initalize();
+    }
+}
