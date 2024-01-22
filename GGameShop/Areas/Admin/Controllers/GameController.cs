@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Microsoft.Extensions.Caching.Memory;
 using Models.Models;
 using Models.ViewModels;
 using Utility;
@@ -19,15 +20,29 @@ namespace GGameShop.Areas.Admin.Controllers
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _webHostEnviroment;
         private readonly IUnitOfWork _unitOfWork;
-        public GameController(ApplicationDbContext db, IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment)
+        private readonly IMemoryCache _memoryCache;
+        private readonly string cacheKey = "gameCacheKey";
+        public GameController(ApplicationDbContext db, IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment,IMemoryCache memoryCache)
         {
             _db = db;
             _unitOfWork = unitOfWork;
             _webHostEnviroment = webHostEnvironment;
+            _memoryCache = memoryCache;
         }
         public IActionResult Index()
         {
-            List<Game> gamesList = _unitOfWork.GameRepository.GetAll(includeProperties: "GameCategory").ToList();
+            if (!_memoryCache.TryGetValue(cacheKey, out List<Game> gamesList))
+            {
+                // Jeśli nie, pobierz dane z bazy danych
+                gamesList = _unitOfWork.GameRepository.GetAll(includeProperties: "GameCategory").ToList();
+
+                // Dodaj dane do pamięci podręcznej na określony czas (np. 5 minut)
+                var cacheEntryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+                };
+                _memoryCache.Set(cacheKey, gamesList, cacheEntryOptions);
+            }
 
             return View(gamesList);
         }
