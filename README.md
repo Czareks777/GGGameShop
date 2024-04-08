@@ -34,6 +34,13 @@ CRUD do kategorii gier:
 Oraz możliwość dodawania nowych gier:
 ![image](https://github.com/Czareks777/GGameShop/assets/107208527/66245a93-4e71-4ffb-a2e0-3d0067f5dbae)
 
+Widok edycji gier:
+![image](https://github.com/Czareks777/GGameShop/assets/107208527/d83a0e8a-cd90-4525-908e-74c6e1056c50)
+
+Również możemy dodawać swoje zdjęcia z lokalnego hosta.
+![image](https://github.com/Czareks777/GGameShop/assets/107208527/743b00c7-af73-4383-a586-c6405ecd479d)
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 W kodzie zastosowane zostało rozwiązanie Unit of Work do uporządkowania repozytoriów.
